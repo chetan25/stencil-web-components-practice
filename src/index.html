@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+    <title>Stencil Component Starter</title>
+    <style>
+      html {
+        --color-primary: red;
+        --drawer-header: purple;
+      }
+      body {
+        font-family: sans-serif;
+      }
+      .wrapper {
+        margin: 3rem;
+        text-align: center;
+      }
+      .side-nav ul {
+        list-style: none;
+      }
+      .side-nav li {
+        margin: 1rem 0;
+      }
+      .side-nav a {
+        text-decoration: none;
+        color: black;
+      }
+      .side-nav a:active,
+      .side-nav a:hover {
+        color: blue;
+        text-decoration: underline;
+      }
+      /* Style all p tags inside a web components shadow DOM */
+      cd-side-drawer::shadow p {
+        color: red;
+      }
+      .close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 1rem;
+        color: white;
+        background: transparent;
+        border: none;
+        font-size: medium;
+      }
+      .close:hover,
+      .close:focus {
+        outline: none;
+        cursor: pointer;
+      }
+    </style>
+    <script type="module" src="/build/cd-web-components.esm.js"></script>
+    <script nomodule src="/build/cd-web-components.js"></script>
+  </head>
+  <body>
+<!--    <my-component first="Stencil" last="'Don't call me a framework' JS"></my-component>-->
+   <div class="wrapper">
+     <button id="sideBar">Open Modal</button>
+     <cd-side-drawer slide="left">
+       <div slot="drawer-header">
+         <h1>Settings</h1>
+       </div>
+       <button
+         slot="drawer-close-icon"
+         class='close'
+         id="sidebarClose"
+       >Close</button>
+       <div slot="drawer-content">
+         <div>
+           <nav class="side-nav">
+             <ul>
+               <li onclick={alert('Test')}>
+                 <a href="#">Test</a>
+               </li>
+               <li onclick={alert('Score')}>
+                 <a href="#">Score</a>
+               </li>
+             </ul>
+           </nav>
+         </div>
+       </div>
+     </cd-side-drawer>
+   </div>
+
+   <div class="wrapper">
+     <div><h3>Custom Text Input</h3></div>
+     <cd-text-input value="test" isValid="true"></cd-text-input>
+   </div>
+<!--   <cd-stock-price symbol="ttt"></cd-stocks-price>-->
+
+    <div class="wrapper">
+      <div><h3>Stock Symbol Finder and Price Finder Widget</h3></div>
+      <div>
+        <div><cd-stock-finder></cd-stock-finder></div>
+        <div><cd-stock-price></cd-stock-price></div>
+      </div>
+    </div>
+      <script>
+      const drawer = document.querySelector('cd-side-drawer');
+      const btn = document.getElementById('sideBar');
+      btn.addEventListener('click', event => {
+        // or check drawer.open
+        if (!drawer.hasAttribute('opened')) {
+          drawer.onOpen();
+          // drawer.opened =true;
+          // drawer.setAttribute('opened', 'true')
+        }
+      });
+
+      const sideBarCloseBtn = document.getElementById('sidebarClose');
+      sideBarCloseBtn.addEventListener('click', event => {
+        if (drawer.hasAttribute('opened')) {
+           drawer.onClose();
+        }
+      });
+
+      const textInp = document.querySelector('cd-text-input');
+      // cannot pass function as Prop in Html, that's why using alternative approach
+      textInp.onFocusOut = (value) => {
+        console.log('from outside', value);
+      }
+      // const stckFinder = document.querySelector('cd-stock-finder');
+      // stckFinder.addEventListener('cdSymbolSelected', (event) => {
+      //     console.log(event);
+      // });
+    </script>
+  </body>
+</html>

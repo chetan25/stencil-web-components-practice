@@ -1,0 +1,30 @@
+:host {
+  display: block;
+  font-family: sans-serif;
+}
+
+input {
+  border-radius: 11%;
+  padding: var(--input-padding , 0.5rem);
+  font-weight: var(--input-font-weight , bold);
+  font-size: var(--input-font-size ,  1.1rem);
+}
+
+input:focus,
+input:hover {
+  border-radius: 1%;
+}
+
+/*:host([isValid=false]) input,*/
+/*:host([isValid=false]) input:focus,*/
+/*:host([isValid=false]) input:active {*/
+/*  border-color: var(--input-error-color, red);*/
+/*  outline: red;*/
+/*}*/
+
+input.error,
+input.error:focus,
+input.error:active {
+  border-color: var(--input-error-color, red);
+  outline: red;
+}

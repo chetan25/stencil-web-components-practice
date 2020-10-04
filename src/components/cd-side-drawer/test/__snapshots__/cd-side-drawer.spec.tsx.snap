@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`cd-side-drawer renders 1`] = `
+<cd-side-drawer slide="left">
+  <mock:shadow-root>
+    <div class="backdrop"></div>
+    <aside>
+      <header>
+        <slot name="drawer-header"></slot>
+        <button class="close">
+          X
+        </button>
+      </header>
+      <main>
+        <slot name="drawer-content"></slot>
+      </main>
+    </aside>
+  </mock:shadow-root>
+  <div class="header-class" slot="drawer-header">
+    Settings
+  </div>
+  <div slot="drawer-content">
+    <div>
+      Content
+    </div>
+  </div>
+</cd-side-drawer>
+`;
